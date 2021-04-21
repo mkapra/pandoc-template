@@ -7,6 +7,12 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - uses: tokusumi/markdown-embed-code@main
+        with:
+          markdown: "document.md"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          message: "synchronizing Readme"
+          silent: true
       - run: |
           mkdir output
       - uses: docker://pandoc/latex:2.9
