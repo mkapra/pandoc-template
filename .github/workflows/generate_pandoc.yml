@@ -1,0 +1,21 @@
+name: Generate PDF/HTML and upload as artifact
+
+on: push
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          mkdir output
+      - uses: docker://pandoc/latex:2.9
+        with:
+          args: --highlight-style breezeDark --output=output/output.pdf document.md
+      - uses: docker://pandoc/latex:2.9
+        with:
+          args: --highlight-style breezeDark --output=output/output.html document.md
+      - uses: actions/upload-artifact@master
+        with:
+          name: documents
+          path: output
