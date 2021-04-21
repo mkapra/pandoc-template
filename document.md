@@ -6,5 +6,5 @@ geometry: margin=2cm
 ---
 
 # Heading 1
-\```python:code/test.py
-\```
+
+\```python:code/test.py \```
