@@ -16,9 +16,6 @@ jobs:
       - uses: tokusumi/markdown-embed-code@main
         with:
           markdown: "document.md"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          message: "synchronizing Readme"
-          silent: true
       - name: Check modified (success if not changed, failure if the other)
         id: modified
         run: if [[ $(git status --porcelain | wc -l) != "0" ]]; then exit 1; fi
