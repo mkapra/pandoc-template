@@ -10,6 +10,8 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+      - run: |
+          ls -la
       - uses: tokusumi/markdown-embed-code@main
         with:
           markdown: "document.md"
