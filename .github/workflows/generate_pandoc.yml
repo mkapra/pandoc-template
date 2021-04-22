@@ -16,10 +16,7 @@ jobs:
       - uses: tokusumi/markdown-embed-code@main
         with:
           markdown: "document.md"
-          output: "ouput/new_document.md"
-      - run: |
-          ls -la
-          id
+          token: ${{ secreates.GITHUB_TOKEN }}
       - name: Check modified (success if not changed, failure if the other)
         id: modified
         run: if [[ $(git status --porcelain | wc -l) != "0" ]]; then exit 1; fi
