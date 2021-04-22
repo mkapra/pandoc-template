@@ -12,6 +12,7 @@ jobs:
           fetch-depth: 0
       - run: |
           ls -la
+          id
       - uses: tokusumi/markdown-embed-code@main
         with:
           markdown: "document.md"
