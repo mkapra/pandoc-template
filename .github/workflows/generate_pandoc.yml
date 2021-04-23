@@ -13,6 +13,7 @@ jobs:
         with:
           markdown: "document.md"
           token: ${{ secrets.GITHUB_TOKEN }}
+          push: false
       - uses: Ender-events/pandoc@master
         with:
           args: --highlight-style breezeDark --output=output/output.pdf -V geometry:margin=2cm document.md
