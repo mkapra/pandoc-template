@@ -17,10 +17,10 @@ jobs:
         id: modified
         run: if [[ $(git status --porcelain | wc -l) != "0" ]]; then exit 1; fi
         continue-on-error: true
-      - uses: docker://pandoc/latex:2.9
+      - uses: Ender-events/pandoc@master
         with:
           args: --highlight-style breezeDark --output=output/output.pdf -V geometry:margin=2cm document.md
-      - uses: docker://pandoc/latex:2.9
+      - uses: Ender-events/pandoc@master
         with:
           args: --highlight-style breezeDark --output=output/output.html -V geometry:margin=2cm document.md
       - name: Commit files
