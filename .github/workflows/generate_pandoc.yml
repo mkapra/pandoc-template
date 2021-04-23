@@ -31,10 +31,10 @@ jobs:
           branch: ${{ github.head_ref }}
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --highlight-style breezeDark --output=output/output.pdf document.md
+          args: --highlight-style breezeDark --output=output/output.pdf -V geometry:margin=2cm document.md
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --highlight-style breezeDark --output=output/output.html document.md
+          args: --highlight-style breezeDark --output=output/output.html -V geometry:margin=2cm document.md
       - uses: actions/upload-artifact@master
         with:
           name: documents
