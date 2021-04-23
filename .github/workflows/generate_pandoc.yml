@@ -6,6 +6,8 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     steps:
+      - run: |
+          mkdir output
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -13,27 +15,23 @@ jobs:
         with:
           markdown: "document.md"
           token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: Ender-events/pandoc@master
-        with:
-          args: --highlight-style breezeDark --output=output/output.pdf -V geometry:margin=2cm document.md
-      - uses: Ender-events/pandoc@master
-        with:
-          args: --highlight-style breezeDark --output=output/output.html -V geometry:margin=2cm document.md
       - name: Check modified (success if not changed, failure if the other)
         id: modified
         run: if [[ $(git status --porcelain | wc -l) != "0" ]]; then exit 1; fi
         continue-on-error: true
-      - name: Commit files
-        if: steps.modified.outcome == 'failure'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git pull origin "${{ env.GITHUB_REF_SLUG }}"
-          git add .
-          git commit -m "Embedding code into Markdown"
       - name: Push changes
         if: steps.modified.outcome == 'failure'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.head_ref }}
+      - uses: Ender-events/pandoc@master
+        with:
+          args: --highlight-style breezeDark --output=output/output.pdf -V geometry:margin=2cm document.md
+      - uses: Ender-events/pandoc@master
+        with:
+          args: --highlight-style breezeDark --output=output/output.html -V geometry:margin=2cm document.md
+      - uses: actions/upload-artifact@v2
+        with:
+          name: documents
+          path: output
