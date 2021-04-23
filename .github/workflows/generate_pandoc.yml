@@ -13,16 +13,16 @@ jobs:
         with:
           markdown: "document.md"
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check modified (success if not changed, failure if the other)
-        id: modified
-        run: if [[ $(git status --porcelain | wc -l) != "0" ]]; then exit 1; fi
-        continue-on-error: true
       - uses: Ender-events/pandoc@master
         with:
           args: --highlight-style breezeDark --output=output/output.pdf -V geometry:margin=2cm document.md
       - uses: Ender-events/pandoc@master
         with:
           args: --highlight-style breezeDark --output=output/output.html -V geometry:margin=2cm document.md
+      - name: Check modified (success if not changed, failure if the other)
+        id: modified
+        run: if [[ $(git status --porcelain | wc -l) != "0" ]]; then exit 1; fi
+        continue-on-error: true
       - name: Commit files
         if: steps.modified.outcome == 'failure'
         run: |
