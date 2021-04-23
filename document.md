@@ -3,4 +3,4 @@
 ## date: \today
 
 ## Section 1
-\```python:code/test.py \```
+```python:code/test.py```
