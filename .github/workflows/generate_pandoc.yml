@@ -28,7 +28,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git pull origin ${{ github.head_ref }}
+          git pull origin ${{ env.GITHUB_REF_SLUG }}
           git add .
           git commit -m "Embedding code into Markdown"
       - name: Push changes
