@@ -12,7 +12,7 @@ jobs:
       - run: |
           mkdir output
           ls -la
-      - uses: tokusumi/markdown-embed-code@main
+      - uses: mkapra/markdown-embed-code@main
         with:
           markdown: "document.md"
           token: ${{ secrets.GITHUB_TOKEN }}
