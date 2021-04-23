@@ -9,9 +9,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: |
-          mkdir output
-          ls -la
       - uses: mkapra/markdown-embed-code@main
         with:
           markdown: "document.md"
