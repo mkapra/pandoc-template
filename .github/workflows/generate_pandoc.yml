@@ -25,15 +25,12 @@ jobs:
           branch: ${{ github.head_ref }}
       - run: |
           mkdir output
-          ls -la
       - uses: Ender-events/pandoc@master
         with:
           args: --highlight-style breezeDark --output=output/output.pdf -V geometry:margin=2cm document.md
       - uses: Ender-events/pandoc@master
         with:
           args: --highlight-style breezeDark --output=output/output.html -V geometry:margin=2cm document.md
-      - run: |
-          ls -la
       - uses: actions/upload-artifact@v2
         with:
           name: documents
